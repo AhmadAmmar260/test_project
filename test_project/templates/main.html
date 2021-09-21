@@ -1,0 +1,81 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8" dir="rtl">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="login">
+    <div onclick="make_alert()" class="pressed_div"><h3>حساب شخصي</h3>
+        <img src="{% static 'img/user.png' %}" class="icon_image" alt="">
+    </div>
+<br>
+    <div onclick="make_alert()" class="pressed_div" ><h3 class="h3">حسابات المطاعم</h3>
+        <img src="{% static 'img/dish_icon.png' %}" id=icon_image class="icon_image" alt="">
+    </div>
+</div>
+
+
+<style>
+    body{
+        background-image: url("{% static 'img/a.jpg' %}") ;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size:  cover;
+        background-attachment: fixed;
+
+
+    }
+    .login{
+        
+        position: absolute;
+       
+        top: 50%;
+        left: 50%;
+        margin-top: -15%;
+        margin-left: -15%;
+        width: 30%;
+        height: 30%;
+
+    }
+    .icon_image{
+        width: 22%;
+        height: 43%;
+        position: absolute;
+        margin-left: 10%;
+        
+    }
+    .pressed_div{
+        height: 45%;
+        border-radius: 10%;
+        color: white;
+        background-color: rgb(223, 5, 5);
+        overflow: hidden;
+        
+        
+    }
+    h3{
+        position: absolute;
+        margin-left: 50%;
+        font-size: 100%;
+        
+    }
+</style>
+
+
+<script>
+    function make_alert(){
+        window.open("https://www.w3schools.com","_self");
+    }
+
+    //document.getElementById("icon_image").style.width="20%"
+
+</script>
+
+</body>
+</html>

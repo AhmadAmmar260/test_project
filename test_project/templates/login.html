@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="login_widget">
+        <h1>تسجيل الدخول </h1>
+        <br>
+     
+        <div class="input_div">
+        <h3>البريد الاكتروني او رقم الهاتف</h3></div>
+        <input class="email_text" alt="testing" placeholder="you@example.com or 07xxxxxxx"  type="text">
+    
+        <br>
+        <br>
+        <div class="input_div">
+        <h3>الرمز السري</h3>
+    </div>
+        <input class="passcode" required placeholder="ادخل ست حروف او اكثر" type="password"> 
+       
+        <br><br>
+        
+            <button  type="submit" onclick="press_me()" class="button_login">
+                تسجيل الدخول
+                </button>
+        
+        <br>
+        <br>
+    
+        <a href="type_of_account">عمل حساب جديد</a>
+        <br>
+        <br>
+        <a class="link_password" href="type_of_account">هل نسيت الرمز السري ؟</a>
+    
+    </div>
+    <script>
+        function press_me(){
+            window.open("http://127.0.0.1:8000/test");
+        }
+    </script>
+    <img class="image" src="{% static 'img/a.jpg' %}">
+<style>
+    .link_password{
+        color: red;
+    }
+    
+    .login_widget{
+
+        position: absolute;
+        top: 40%;
+        left: 72%;
+        margin-top: -15%;
+       
+        width: 25%;
+        height: 30%;
+        text-align:center;
+
+    }
+    .input_div{
+        width: 100%;
+        text-align: right;
+    }
+    .passcode{
+        width: 100%;
+        height: 20%;
+        border-radius: 5%;
+    }
+
+    .email_text{
+        width: 100%;
+        height: 20%;
+        border-radius: 5%;
+    }
+    .image{
+        width: 70%;
+        height: 99%;
+        position: absolute;
+        margin-left: 0%;
+    }
+    .button_login{
+        width: 50%;
+        background-color: rgb(214, 19, 19);
+        color: white;
+        border-radius: 5%;
+        font-size: large;
+    }
+</style>
+
+</body>
+</html>
