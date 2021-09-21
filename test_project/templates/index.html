@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="container">
+            <a class="logo" style="color:black;" href=" # ">Your<span style="color: blue; ">food</span></a>
+            <img class="menu-svg" id="menu_svg" src="{% static 'img/menu.svg' %}" alt="nav_mob_img" />
+
+            <nav>
+
+                <img id="close_menu_nav" class="close-navigation" src="{% static 'img/exit.svg' %}" alt="Close Navigation">
+                <ul class="primary-navigation">
+
+
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Suggestion</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+
+                </ul>
+
+
+                <ul class="secondary-navigation">
+                    <li>
+                        <li><a href="#">SignIn</a></li>
+                        <li><a href="#">SignOut</a></li>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+    <section class="hero">
+        <div class="container">
+            <div class="left_col">
+                <p class="we">we are</p>
+                <h1 class="waiting">waiting</h1>
+                <p class="y">you</p>
+                <p class="our">our restaurant have alot of delicous food in seductive price,</p>
+                <br>
+                <p class="just">Just come and the customer always right,see you soon</p>
+            </div>
+            <div class="right_col">
+                <div class="left-row">
+                    <img class="left-row-img1" src="{% static 'img/photo-2.jpg' %}" alt="left row photo1">
+                    <img class="left-row-img2" src="{% static 'img/photo-3.jpg' %}" alt="left row photo2">
+                </div>
+                <div class="right-row">
+                    <img class="right-row-img3" src="{% static 'img/photo-1.jpg' %}" alt="right row photo">
+                </div>
+            </div>
+    </section>
+    <section class="About">
+        <div class="container">
+            <div class="left-about">
+                <img class="left-about-img" src="{% static 'img/about-photo.jpg' %}" alt="left about photo">
+            </div>
+            <div class="right-about">
+                <h1 class="h1-right-about">About US</h1>
+                <p class="p2-right-about">Restaurant ´De Barones´ You are welcome for breakfast, lunch or dinner in our cosy restaurant. Our menu has a variety of delicious dishes. During the summer you can enjoy the sun on our terrace. Breakfast You can come to our restaurant
+                    every day for a delicious breakfast buffet. On the buffet, you can find for example: Fresh coffee and tea, fruit juices, dairy products such as milk, buttermilk and yoghurt, cruesli and muesli, several sandwiches, croissants, chocolate
+                    sandwiches, butter and sweet fillings (marmalade, sprinkles, chocolate spread and peanut butter) several eggs, bacon, several cheeses, sausages and fruit. Price: €17,50 per person (hotel guest) Price: € 19,50 per person (no hotel guest)
+                    Opening hours breakfast: Monday until Friday: 6.30 – 10.00 o’clock Saturday and Sunday: 8.00 – 11.00 o’clock Lunch In our restaurant, we serve (almost) every afternoon a lunch buffet from 12.00 o’clock till 13.30 (except on Saturday
+                    and Sunday). On the buffet, you can find for example: The soup of the day, several meats, several cheeses, several types of bread, 6 kind of warm dishes (the dishes will change by day), several sweet fillings, several salads, coffee,
+                    tea, milk, buttermilk, orange juice and yoghurt. Price: €19.50 per person. It is also possible to lunch a la carte at our restaurant. Dinner It is possible to have dinner a la carte in our restaurant. We serve a special menu for groups.
+                    Except our extensive menu card, with by example our Valkdishes, we also serve seasonal dishes. In the months May and June we serve delicious fresh asparagus. In the summer months we presents the real mussels from Zeeland and in the
+                    autumn we serve delicious venison dishes. Of course we have a menu for children (Timo Toekan) with a price of €8,50. And we also have vegetarian dishes. Do you have special wishes or are you following a diet? Please let us know and
+                    we will keep this in mind.</p>
+            </div>
+        </div>
+    </section>
+    <section class="Contact">
+        <div class="container">
+            <div class="contactleft">
+                <h2>Contact</h2>
+                <form action="">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Your name">
+                    <br>
+                    <label for="email;">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Your email">
+                    <br>
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" cols="30" rows="10">Write your message here</textarea>
+                    <input type="submit" value="Send Message" class="submit-send-cta">
+                </form>
+                 </div>
+            </div>
+            <div class="contactright">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25716.82005732979!2d43.19493402754481!3d36.321944934000015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x400797e87943e2ef%3A0x387b934162b1cbea!2z2YXYs9iq2LTZgdmJINin2YTYs9mE2KfZhSDYp9mE2KrYudmE2YrZhdmK!5e0!3m2!1sar!2siq!4v163208488018!5m2!1sar!2siq"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+    </section>
+    <script>
+        const mobileBTN = document.getElementById('menu_svg');
+        nav = document.querySelector('nav');
+        const mobileBTN_exit = document.getElementById('close_menu_nav');
+        mobileBTN.addEventListener('click', () => {
+            nav.classList.add('menu-svg');
+        });
+        mobileBTN_exit.addEventListener('click', () => {
+            nav.classList.remove('menu-svg');
+        });
+    </script>
+</body>
+
+</html>

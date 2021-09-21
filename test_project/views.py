@@ -1,14 +1,24 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse ,JsonResponse
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib import auth
 
 def index(request):
     return render(request,'main.html')
 
-
+def home(request):
+    return render(request,'index.html')
 def login(request):
-    
-    return render(request,"login.html")
+    if request.method == 'POST':
+        email = request.POST.get('emailll')
+        password = request.POST.get('password')
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+        return redirect('/home')
+    else:
+        return render(request,"login.html")
 
 
 from django.views.decorators.csrf import csrf_exempt

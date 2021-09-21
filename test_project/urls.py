@@ -5,5 +5,6 @@ urlpatterns = [
    path('type_of_account',index,name='index'),
    path('login',login,name='login'),
    path('register',register,name='register'),
-   path('test',adding)
+   path('test',adding),
+   path('home',home,name='home')
 ]
