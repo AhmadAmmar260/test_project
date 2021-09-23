@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+    <div id="showign_data">
+
+    </div>
+    
+    <div id="" class="box">
+     <img src="" alt="">
+    </div>
+    <script>
+        var container=document.getElementById('showign_data');
+        var num=1;
+
+        
+       /* function bring_data (){
+            console.log(num)
+            var our_request=new XMLHttpRequest();
+            our_request.open('GET','http://127.0.0.1:8000/get_data?'+"number="+num)
+            our_request.onload=function (){
+                var our_data=JSON.parse(our_request.responseText);
+                //var our_data=(our_request.responseText);
+                var varia=[];
+                html_data="";
+                for (var i=0 ;i<10;i++){
+                    cat1=our_data['cat'+(i+1)];
+                    varia[i]=cat1;
+                    html_data=html_data+'<img src="'+cat1+'" alt=""><br>'; 
+                }
+                console.log(html_data)
+
+                container.insertAdjacentHTML('beforeend',html_data)
+
+
+            };
+            //our_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            num=num+1
+            our_request.send();
+            
+            
+        }*/
+
+       
+
+        function bring_data (){
+            console.log(num)
+            var our_request=new XMLHttpRequest();
+            our_request.open('POST','http://127.0.0.1:8000/get_data')
+            our_request.onload=function (){
+                var our_data=JSON.parse(our_request.responseText);
+                //var our_data=(our_request.responseText);
+                var varia=[];
+                html_data="";
+                for (var i=0 ;i<10;i++){
+                    cat1=our_data['cat'+(i+1)];
+                    varia[i]=cat1;
+                    html_data=html_data+'<img src="'+cat1+'" alt=""><br>'; 
+                }
+                console.log(html_data)
+
+                container.insertAdjacentHTML('beforeend',html_data)
+
+
+            };
+            //our_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            num=num+1
+            our_request.send({"name":num});
+            
+            
+        }
+
+
+
+
+
+
+
+
+
+
+        
+        function aa(){
+        const box = document.querySelector('.box');
+const rect = box.getBoundingClientRect();
+
+const isInViewport = rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+        if (isInViewport==true){
+            bring_data();
+        }
+console.log(isInViewport);}
+setInterval(aa, 500)
+    </script>
+</body>
+</html>

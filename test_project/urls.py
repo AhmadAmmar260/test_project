@@ -8,5 +8,10 @@ urlpatterns = [
    path('register',register,name='register'),
    path('test',adding),
    path('home',home,name='home'),
-   path('ajax/username_validate/',validate_username,name="validate_username")
+   path('ajax/username_validate/',validate_username,name="validate_username"),
+   path('login',login3,name='login'),
+   path('test',adding),
+   path('get_data',get_data,name="name"),
+   path('testing_data',testing_data)
+
 ]
