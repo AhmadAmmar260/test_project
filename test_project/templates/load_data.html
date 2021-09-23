@@ -22,10 +22,11 @@
         var num=1;
 
         
-       /* function bring_data (){
+       function bring_data (){
             console.log(num)
             var our_request=new XMLHttpRequest();
             our_request.open('GET','http://127.0.0.1:8000/get_data?'+"number="+num)
+            
             our_request.onload=function (){
                 var our_data=JSON.parse(our_request.responseText);
                 //var our_data=(our_request.responseText);
@@ -34,60 +35,63 @@
                 for (var i=0 ;i<10;i++){
                     cat1=our_data['cat'+(i+1)];
                     varia[i]=cat1;
-                    html_data=html_data+'<img src="'+cat1+'" alt=""><br>'; 
+                    html_data=html_data+'<div class="image_div"><img class="image" src="'+cat1+'" alt=""></div>'; 
                 }
-                console.log(html_data)
+                console.log(html_data);
 
-                container.insertAdjacentHTML('beforeend',html_data)
-
-
+                container.insertAdjacentHTML('beforeend',html_data);
             };
             //our_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             num=num+1
+           
             our_request.send();
+            
+            }
+             
+            /*function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+            function bring_data (){
+            console.log(num)
+            var our_request=new XMLHttpRequest();
+            our_request.open('POST','http://127.0.0.1:8000/post_data');
+            
+            our_request.onload=function (){
+                var our_data=(our_request.responseText);
+                container.insertAdjacentHTML('beforeend',our_data);
+            };
+            var csrftoken = getCookie('csrftoken');
+          
+            //our_request.setRequestHeader("Content-Type", "application/json");
+            our_request.setRequestHeader("X-CSRFToken", csrftoken);
+            num=num+1;
+            var data = {name:'yogesh',salary: 35000,email: 'yogesh@makitweb.com'};
+            our_request.send("fname=Henry&lname=Ford");
+            
             
             
         }*/
-
-       
-
-        function bring_data (){
-            console.log(num)
-            var our_request=new XMLHttpRequest();
-            our_request.open('POST','http://127.0.0.1:8000/get_data')
-            our_request.onload=function (){
-                var our_data=JSON.parse(our_request.responseText);
-                //var our_data=(our_request.responseText);
-                var varia=[];
-                html_data="";
-                for (var i=0 ;i<10;i++){
-                    cat1=our_data['cat'+(i+1)];
-                    varia[i]=cat1;
-                    html_data=html_data+'<img src="'+cat1+'" alt=""><br>'; 
-                }
-                console.log(html_data)
-
-                container.insertAdjacentHTML('beforeend',html_data)
-
-
-            };
-            //our_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            num=num+1
-            our_request.send({"name":num});
-            
-            
-        }
-
-
-
-
-
-
-
-
-
-
         
+
+
+
+
+
+
+
         function aa(){
         const box = document.querySelector('.box');
 const rect = box.getBoundingClientRect();
@@ -100,7 +104,44 @@ const isInViewport = rect.top >= 0 &&
             bring_data();
         }
 console.log(isInViewport);}
-setInterval(aa, 500)
+setInterval(aa, 100)
     </script>
+
+2
+<style>
+
+  #showign_data{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-gap: 1em 1% ;
+
+  }
+  .image_div {
+  position: relative;
+  width: 100%; /* The size you want */
+  
+}
+.image_div:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%; /* The padding depends on the width, not on the height, so with a padding-bottom of 100% you will get a square */
+
+}
+
+.image {
+  
+  position: absolute; /* Take your picture out of the flow */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; /* Make the picture taking the size of it's parent */
+  width: 100%; /* This if for the object-fit */
+  height: 100%; /* This if for the object-fit */
+  object-fit: cover; /* Equivalent of the background-size: cover; of a background-image */
+  object-position: center;
+}
+
+
+</style>
 </body>
 </html>

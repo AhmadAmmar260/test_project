@@ -44,3 +44,10 @@ def get_data(request):
     print(data)
     print(numbe)
     return JsonResponse((data))
+
+def post_data(request):
+    a=request.POST
+    print(a)
+    return HttpResponse("hi")
+
+

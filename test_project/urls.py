@@ -6,5 +6,6 @@ urlpatterns = [
    path('login',login,name='login'),
    path('test',adding),
    path('get_data',get_data,name="name"),
-   path('testing_data',testing_data)
+   path('testing_data',testing_data),
+   path("post_data",post_data)
 ]
