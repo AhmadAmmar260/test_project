@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Registration</title>
+</head>
+
+<body>
+    {% if form.errors %}
+    <p>{{form.errors}}ERROR</p>
+    {% endif %}
+    <span id="span_id" style="display: none;"></span>
+    <form action="{% url 'Registration' %}" method="post">
+        {%csrf_token%} {{form}}
+        <input type="submit" value="submit" id="">
+    </form>
+
+    <script>
+        $("#id_username ").change(function() {
+            var username = $(this).val();
+            $.ajax({
+                url: '/ajax/username_validate/',
+                data: {
+                    'username': username
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.is_taken) {
+                        $("#span_id").text("the username aleardy taken!!!! ");
+                        $("#span_id").css("display", "block");
+                    } else {
+                        $("#span_id").css("display", "none");
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
