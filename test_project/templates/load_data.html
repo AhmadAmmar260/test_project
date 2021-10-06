@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,24 +9,65 @@
 </head>
 <body>
 
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <div class="navbar">
+        <div class="container">
+            <a class="logo" style="color:black;" href=" # ">Your<span style="color: blue; ">food</span></a>
+            <img class="menu-svg" id="menu_svg" src="{% static 'img/menu.svg' %}" alt="nav_mob_img" />
+
+            <nav>
+
+                <img id="close_menu_nav" class="close-navigation" src="{% static 'img/exit.svg' %}" alt="Close Navigation">
+                <ul class="primary-navigation">
 
 
-    <div id="showign_data">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Suggestion</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+
+                </ul>
+
+
+                <ul class="secondary-navigation">
+                    <li>
+                        {% if user.is_authenticated %}
+                        <li><a href="/accounts/logout/">SignOut</a></li>
+                        {% else %}
+                        <li><a href="/accounts/login/">SignIn</a></li>
+                        <li><a href="/Registration">Register</a></li>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
     </div>
     
-    <div id="" class="box">
-     <img src="" alt="">
+    {% if user.is_authenticated %}
+                <h1 class="waiting">Hi   {{user.username}}</h1>
+                {% else %}
+                <h1 class="waiting">waiting</h1>
+                {% endif %}
+    <div id="showign_data">
+
     </div>
+   <div id="ab" class="box">
+     <img src="" alt="">
+     hi
+    </div>
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script>
         var container=document.getElementById('showign_data');
         var num=1;
 
-        
-       /* function bring_data (){
+        /*
+       function bring_data (){
             console.log(num)
             var our_request=new XMLHttpRequest();
             our_request.open('GET','http://127.0.0.1:8000/get_data?'+"number="+num)
+            
             our_request.onload=function (){
                 var our_data=JSON.parse(our_request.responseText);
                 //var our_data=(our_request.responseText);
@@ -34,73 +76,133 @@
                 for (var i=0 ;i<10;i++){
                     cat1=our_data['cat'+(i+1)];
                     varia[i]=cat1;
-                    html_data=html_data+'<img src="'+cat1+'" alt=""><br>'; 
+                    html_data=html_data+'<div class="image_div"><img class="image" src="'+cat1+'" alt=""></div>'; 
                 }
-                console.log(html_data)
+                console.log(html_data);
 
-                container.insertAdjacentHTML('beforeend',html_data)
-
-
+                container.insertAdjacentHTML('beforeend',html_data);
             };
             //our_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             num=num+1
+           
             our_request.send();
             
-            
-        }*/
-
-       
-
-        function bring_data (){
-            console.log(num)
-            var our_request=new XMLHttpRequest();
-            our_request.open('POST','http://127.0.0.1:8000/get_data')
-            our_request.onload=function (){
-                var our_data=JSON.parse(our_request.responseText);
-                //var our_data=(our_request.responseText);
-                var varia=[];
-                html_data="";
-                for (var i=0 ;i<10;i++){
-                    cat1=our_data['cat'+(i+1)];
-                    varia[i]=cat1;
-                    html_data=html_data+'<img src="'+cat1+'" alt=""><br>'; 
-                }
-                console.log(html_data)
-
-                container.insertAdjacentHTML('beforeend',html_data)
-
-
-            };
-            //our_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            num=num+1
-            our_request.send({"name":num});
-            
-            
+            }*/
+             var allowed=true;
+            function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
         }
-
-
-
-
-
-
-
+    }
+    console.log(cookieValue);
+    return cookieValue;
+}
 
 
 
         
+
+function bring_data ( ) {
+    allowed=false;
+    var csrftoken = getCookie('csrftoken');
+    $.ajaxSetup({
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken")
+            }
+        });
+    $.ajax(
+{
+    type:"POST",
+    url: "http://127.0.0.1:8000/post_data",
+    data:{
+             
+          "number":num
+    },
+    
+    success: function( r_data ) 
+    {allowed=true;
+
+
+
+
+    
+               
+                html_data="";
+                for (var i=0 ;i<10;i++){
+                    cat1=r_data['cat'+(i+1)];
+                   
+                    html_data=html_data+'<div class="image_div"><img class="image" src="'+cat1+'" alt=""></div>'; 
+                }
+                console.log(html_data);
+
+                container.insertAdjacentHTML('beforeend',html_data);
+        
+     num=num+1;
+    }
+ })
+    }
+
         function aa(){
-        const box = document.querySelector('.box');
+        const box = document.querySelector('#ab');
 const rect = box.getBoundingClientRect();
 
 const isInViewport = rect.top >= 0 &&
         rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth);
-        if (isInViewport==true){
+        rect.bottom <= (window.innerHeight )+100;
+                if (isInViewport == true && allowed==true){
             bring_data();
         }
-console.log(isInViewport);}
-setInterval(aa, 500)
+console.log(rect.bottom);
+console.log(isInViewport);
+
+
+}
+setInterval(aa, 100)
     </script>
+
+2
+<style>
+
+  #showign_data{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-gap: 1em 1% ;
+
+  }
+  .image_div {
+  position: relative;
+  width: 100%; /* The size you want */
+  
+}
+.image_div:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%; /* The padding depends on the width, not on the height, so with a padding-bottom of 100% you will get a square */
+
+}
+
+.image {
+  
+  position: absolute; /* Take your picture out of the flow */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; /* Make the picture taking the size of it's parent */
+  width: 100%; /* This if for the object-fit */
+  height: 100%; /* This if for the object-fit */
+  object-fit: cover; /* Equivalent of the background-size: cover; of a background-image */
+  object-position: center;
+}
+
+
+</style>
 </body>
 </html>

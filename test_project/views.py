@@ -1,4 +1,5 @@
 
+from django import contrib
 from django.shortcuts import redirect, render
 from django.http import HttpResponse ,JsonResponse
 from django.contrib.auth.models import User
@@ -6,6 +7,8 @@ from django.contrib.auth import authenticate
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login,authenticate
+from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 
 def index(request):
@@ -20,6 +23,7 @@ def login1(request):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
+            
         return redirect('/home')
     else:
         return render(request,"login.html")
@@ -59,6 +63,7 @@ def register(request):
         user = User.objects.create_user(username,email,password)
         user.last_name = 'me'
         user.save()
+        request.session['username']=email
         return redirect('/login1')
     else:
         return render(request,'Register.html')
@@ -98,6 +103,38 @@ import json
 
 def get_data(request):
     a=request.GET['number']
+    data={}
+    print(a)
+    i=int(a)*10
+    numbe=1
+    while i<((int(a)*10)+10):
+    
+        z={"cat{}".format(numbe):'http://127.0.0.1:8000/static/Cat/{}.jpg'.format(i)}
+        numbe+=1
+        i+=1
+        data.update(z)
+    #print(data)
+    print(data)
+    print(numbe)
+    return JsonResponse((data))
+
+def decode(session_id):
+    session = Session.objects.get(session_key=session_id)
+    uid = session.get_decoded().get('_auth_user_id')
+    user = User.objects.get(pk=uid)
+    return user
+
+
+def post_data(request):
+    b=request.POST
+    session_key=request.session.session_key
+    
+    
+    
+    user=decode(session_key)
+    print (user.username, user.password, user.email)
+  
+    a=request.POST['number']
     data={}
     print(a)
     i=int(a)*10
